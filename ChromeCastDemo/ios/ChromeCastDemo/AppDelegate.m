@@ -31,6 +31,14 @@ static void InitializeFlipper(UIApplication *application) {
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif
+  
+  GCKDiscoveryCriteria *criteria = [[GCKDiscoveryCriteria alloc]
+      initWithApplicationID:@"AB120CD22"];
+  GCKCastOptions *options =
+      [[GCKCastOptions alloc] initWithDiscoveryCriteria:criteria];
+  [GCKCastContext setSharedInstanceWithOptions:options];
+  
+ 
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
@@ -42,10 +50,6 @@ static void InitializeFlipper(UIApplication *application) {
   } else {
       rootView.backgroundColor = [UIColor whiteColor];
   }
-NSString *receiverAppID = kGCKDefaultMediaReceiverApplicationID; // or @"ABCD1234"
-GCKDiscoveryCriteria *criteria = [[GCKDiscoveryCriteria alloc] initWithApplicationID:receiverAppID];
-GCKCastOptions* options = [[GCKCastOptions alloc] initWithDiscoveryCriteria:criteria];
-[GCKCastContext setSharedInstanceWithOptions:options];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
